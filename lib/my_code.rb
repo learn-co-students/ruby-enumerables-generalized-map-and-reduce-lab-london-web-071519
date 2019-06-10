@@ -12,13 +12,15 @@ def map(array)
 end
 
 
-def reduce(array, starting_point = 0)
+def reduce(source_array, starting_point = 0)
   counter = 0
-  memo = starting_point
+  value = starting_point
+  memo = 0
 
-  while counter < array.length do
-    yield(array) + memo
+  while counter < source_array.length do
+
+    value += yield(memo, source_array[counter])
     counter += 1
   end
-  memo
+  value
 end
