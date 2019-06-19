@@ -1,5 +1,7 @@
 # Your Code Here
 
+require 'pry'
+
 def map(array)
   counter = 0
   new_array = []
@@ -12,14 +14,18 @@ def map(array)
 end
 
 
-def reduce(source_array, starting_point = 0)
-  counter = 0
-  value = starting_point
-  memo = 0
+def reduce(source_array, starting_point = nil)
 
-  while counter < source_array.length do
+  if starting_point
+    value = starting_point
+    counter = 0
+  else
+    value = source_array[0]
+    counter = 1
+  end
 
-    value += yield(memo, source_array[counter])
+  while counter < source_array.length
+    value = yield(value, source_array[counter])
     counter += 1
   end
   value
